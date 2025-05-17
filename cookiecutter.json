@@ -11,5 +11,6 @@
     "use_coverage": "y",
     "use_black": "y",
     "use_mypy": "y", 
-    "use_flake8": "y"
+    "use_flake8": "y",
+    "use_github_actions": "y"
 }
