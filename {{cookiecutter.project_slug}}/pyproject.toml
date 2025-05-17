@@ -33,7 +33,7 @@ build-backend = "poetry.core.masonry.api"
 {% if cookiecutter.use_black == 'y' -%}
 [tool.black]
 line-length = 88
-target-version = ["py{{cookiecutter.python_version}}"]
+target-version = ["py{{cookiecutter.python_version|replace('.', '')}}"]
 {% endif -%}
 
 {% if cookiecutter.use_mypy == 'y' -%}
