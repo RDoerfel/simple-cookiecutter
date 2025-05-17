@@ -1,51 +1,67 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+[tool.poetry]
+name = "{{cookiecutter.package_name}}"
+version = "0.1.0"
+description = "{{cookiecutter.project_short_description}}"
+authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+readme = "README.md"
+packages = [{include = "{{cookiecutter.package_name}}", from = "src"}]
 
-# Virtual Environments
-.env
-.venv
-venv/
-ENV/
+[tool.poetry.dependencies]
+python = "^{{cookiecutter.python_version}}"
 
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
+[tool.poetry.group.dev.dependencies]
+{% if cookiecutter.use_pytest == 'y' -%}
+pytest = "^7.4.0"
+{% endif -%}
+{% if cookiecutter.use_coverage == 'y' -%}
+pytest-cov = "^4.1.0"
+{% endif -%}
+{% if cookiecutter.use_black == 'y' -%}
+black = "^23.7.0"
+{% endif -%}
+{% if cookiecutter.use_mypy == 'y' -%}
+mypy = "^1.5.0"
+{% endif -%}
+{% if cookiecutter.use_flake8 == 'y' -%}
+flake8 = "^6.1.0"
+{% endif -%}
 
-# Type checking
-.mypy_cache/
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
-# Jupyter Notebooks
-.ipynb_checkpoints
+{% if cookiecutter.use_black == 'y' -%}
+[tool.black]
+line-length = 88
+target-version = ["py{{cookiecutter.python_version}}"]
+{% endif -%}
 
-# IDE files
-.idea/
-.vscode/
-*.swp
-*.swo
+{% if cookiecutter.use_mypy == 'y' -%}
+[tool.mypy]
+python_version = "{{cookiecutter.python_version}}"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+{% endif -%}
 
-# OS specific files
-.DS_Store
-Thumbs.db
+{% if cookiecutter.use_coverage == 'y' -%}
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "--cov=src/{{cookiecutter.package_name}} --cov-report=term-missing --cov-report=xml --cov-report=html"
 
-# Keep empty directories
-!**/.gitkeep
+[tool.coverage.run]
+source = ["src/{{cookiecutter.package_name}}"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == '__main__':",
+    "pass",
+    "raise ImportError",
+]
+{% endif -%}
