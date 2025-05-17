@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -28,9 +29,20 @@ def create_gitkeep_files():
     print("Created .gitkeep files in empty directories.")
 
 
+def cleanup_github_files():
+    """Remove GitHub-related files if GitHub Actions is not enabled."""
+    use_github_actions = "{{ cookiecutter.use_github_actions }}"
+    if use_github_actions.lower() != "y":
+        github_dir = Path(".github")
+        if github_dir.exists():
+            shutil.rmtree(github_dir)
+            print("Removed .github directory since GitHub Actions is not enabled.")
+
+
 def main():
     try:
         create_gitkeep_files()
+        cleanup_github_files()
         initialize_git()
         print("Would you like to install dependencies now? (y/n)")
         choice = input().lower()

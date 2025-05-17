@@ -1,6 +1,13 @@
 # {{cookiecutter.project_name}}
 
 {{cookiecutter.project_short_description}}
+{% if cookiecutter.use_github_actions == 'y' -%}
+
+[![CI](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/actions?query=workflow%3ACI)
+{% if cookiecutter.use_coverage == 'y' -%}
+[![codecov](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}})
+{% endif -%}
+{% endif -%}
 
 ## Project Structure
 
@@ -85,6 +92,28 @@ poetry run mypy src/ tests/
 # Run linting
 poetry run flake8 src/ tests/
 ```
+{% endif -%}
+
+{% if cookiecutter.use_github_actions == 'y' -%}
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The following checks are run on each push and pull request to the main branch:
+
+{% if cookiecutter.use_black == 'y' -%}
+- Code formatting with Black
+{% endif -%}
+{% if cookiecutter.use_flake8 == 'y' -%}
+- Linting with Flake8
+{% endif -%}
+{% if cookiecutter.use_mypy == 'y' -%}
+- Type checking with MyPy
+{% endif -%}
+{% if cookiecutter.use_pytest == 'y' -%}
+- Running tests with pytest
+{% endif -%}
+{% if cookiecutter.use_coverage == 'y' -%}
+- Code coverage reporting with pytest-cov and Codecov
+{% endif -%}
 {% endif -%}
 
 ## License

@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "{{cookiecutter.project_short_description}}"
 authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
 readme = "README.md"
+packages = [{{cookiecutter.package_name}}]
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.python_version}}"
@@ -59,7 +60,7 @@ exclude_lines = [
     "pragma: no cover",
     "def __repr__",
     "raise NotImplementedError",
-    "if __name__ == '__main__':",
+    "if __name__ == .__main__.:",
     "pass",
     "raise ImportError",
 ]

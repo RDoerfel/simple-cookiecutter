@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['{{cookiecutter.python_version}}']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+    
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project true
+    
+    - name: Cache Poetry virtualenv
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: ./.venv
+        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+    
+    - name: Install Dependencies
+      run: poetry install
+      if: steps.cache.outputs.cache-hit != 'true'
+    {% if cookiecutter.use_black == 'y' -%}
+    
+    - name: Code Quality
+      run: |
+        poetry run black --check .
+    {% endif -%}
+    {% if cookiecutter.use_flake8 == 'y' -%}
+    
+    - name: Lint
+      run: |
+        poetry run flake8 src tests
+    {% endif -%}
+    {% if cookiecutter.use_mypy == 'y' -%}
+    
+    - name: Type Check
+      run: |
+        poetry run mypy src tests
+    {% endif -%}
+    {% if cookiecutter.use_pytest == 'y' -%}
+    
+    - name: Test
+      run: |
+        poetry run pytest {% if cookiecutter.use_coverage == 'y' %}--cov=src/{{cookiecutter.package_name}} --cov-report=xml{% endif %}
+    {% endif -%}
+    {% if cookiecutter.use_coverage == 'y' -%}
+    
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
+    {% endif -%}
