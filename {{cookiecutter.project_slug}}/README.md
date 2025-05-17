@@ -13,8 +13,7 @@
 ## Project Structure
 
 ```
-├── src/                # Source code
-│   └── {{cookiecutter.package_name}}/
+├── {{cookiecutter.package_name}}/                # Source code
 ├── data/               # Data files
 ├── tests/              # Test files
 ├── docs/               # Documentation
