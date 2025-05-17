@@ -15,7 +15,9 @@ def initialize_git():
 def initialize_pyenv():
     """Initialize pyenv and install Python version."""
     python_version = "{{ cookiecutter.python_version }}"
-    subprocess.run(["pyenv", "env", "use", python_version], check=True)
+    subprocess.run(["pyenv", "install", python_version], check=True)
+    subprocess.run(["pyenv", "local", python_version], check=True)
+    subprocess.run(["poetry", "env", "use", python_version], check=True)
 
 
 def initialize_poetry():
