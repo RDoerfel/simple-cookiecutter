@@ -58,7 +58,7 @@ poetry run pytest
 
 ```bash
 # Run tests with coverage
-poetry run pytest --cov=src/{{cookiecutter.package_name}} --cov-report=html
+poetry run pytest --cov={{cookiecutter.package_name}} --cov-report=html
 
 # View the HTML coverage report
 open htmlcov/index.html  # On macOS
@@ -81,7 +81,7 @@ poetry run black .
 
 ```bash
 # Run type checking
-poetry run mypy src/ tests/
+poetry run mypy {{cookiecutter.package_name}}/ tests/
 ```
 {% endif -%}
 
@@ -90,7 +90,7 @@ poetry run mypy src/ tests/
 
 ```bash
 # Run linting
-poetry run flake8 src/ tests/
+poetry run flake8 {{cookiecutter.package_name}}/ tests/
 ```
 {% endif -%}
 
