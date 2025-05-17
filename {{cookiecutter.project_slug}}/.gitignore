@@ -50,3 +50,6 @@ Thumbs.db
 
 # Keep empty directories
 !**/.gitkeep
+
+# Poetry
+poetry.lock
