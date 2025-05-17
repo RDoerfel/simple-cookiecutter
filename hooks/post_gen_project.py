@@ -12,6 +12,12 @@ def initialize_git():
     print("Git repository initialized with initial commit.")
 
 
+def initialize_pyenv():
+    """Initialize pyenv and install Python version."""
+    python_version = "{{ cookiecutter.python_version }}"
+    subprocess.run(["pyenv", "env", "use", python_version], check=True)
+
+
 def initialize_poetry():
     """Initialize poetry and install dependencies."""
     subprocess.run(["poetry", "install"], check=True)
@@ -44,6 +50,10 @@ def main():
         create_gitkeep_files()
         cleanup_github_files()
         initialize_git()
+        print("Would you like to initialize pyenv? (y/n)")
+        choice = input().lower()
+        if choice == "y":
+            initialize_pyenv()
         print("Would you like to install dependencies now? (y/n)")
         choice = input().lower()
         if choice == "y":
