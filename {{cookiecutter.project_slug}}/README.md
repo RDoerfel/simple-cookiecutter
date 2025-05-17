@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}})
 {% endif -%}
 {% endif -%}
-
+<br>
 
 {{cookiecutter.project_short_description}}
 
