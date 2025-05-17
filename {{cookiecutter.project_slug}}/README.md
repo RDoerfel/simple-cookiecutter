@@ -1,13 +1,13 @@
 # {{cookiecutter.project_name}}
-
-{{cookiecutter.project_short_description}}
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 {% if cookiecutter.use_github_actions == 'y' -%}
-
 [![CI](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/actions?query=workflow%3ACI)
 {% if cookiecutter.use_coverage == 'y' -%}
 [![codecov](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}})
 {% endif -%}
 {% endif -%}
+
+{{cookiecutter.project_short_description}}
 
 ## Project Structure
 
