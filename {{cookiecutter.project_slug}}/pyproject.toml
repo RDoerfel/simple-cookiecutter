@@ -49,10 +49,10 @@ disallow_incomplete_defs = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
-addopts = "--cov=src/{{cookiecutter.package_name}} --cov-report=term-missing --cov-report=xml --cov-report=html"
+addopts = "--cov={{cookiecutter.package_name}} --cov-report=term-missing --cov-report=xml --cov-report=html"
 
 [tool.coverage.run]
-source = ["src/{{cookiecutter.package_name}}"]
+source = ["{{cookiecutter.package_name}}"]
 omit = ["tests/*"]
 
 [tool.coverage.report]
