@@ -1,78 +1,66 @@
-# {{cookiecutter.project_name}}
+# simple-cookiecutter
 
-{{cookiecutter.project_short_description}}
+A Cookiecutter template for quickly setting up a modern Python project with best practices.
+
+## What does this Cookiecutter do?
+
+This template scaffolds a new Python project with a standardized structure, including:
+
+- Source code and package directory
+- Data, tests, documentation, scripts, and notebooks folders
+- Pre-configured `pyproject.toml` for Poetry
+- Optional integration with tools like pytest, black, mypy, and flake8
+
+You can customize the project name, package name, description, and which development tools to include.
 
 ## Project Structure
 
+A generated project will look like this:
+
 ```
-├── src/                # Source code
-│   └── {{cookiecutter.package_name}}/
-├── data/               # Data files
-├── tests/              # Test files
-├── docs/               # Documentation
-├── scripts/            # Utility scripts
-├── notebooks/          # Jupyter notebooks
-└── pyproject.toml      # Poetry configuration
+your_project_name/
+├── your_package_name/
+│   └── __init__.py
+├── data/
+├── notebooks/
+├── scripts/
+├── tests/
+│   └── __init__.py
+├── docs/
+├── pyproject.toml
+├── README.md
+└── .gitignore
 ```
 
-## Installation
+## How to use this Cookiecutter
+
+### Prerequisites
+
+- [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/):  
+    Install with `pip install cookiecutter`
+- [Poetry](https://python-poetry.org/):  
+    Install with `pip install poetry`
+
+### Usage
 
 ```bash
-# Install the package and dependencies
-poetry install
+# Generate a new project from this template
+cookiecutter gh:your-username/simple-cookiecutter
 ```
 
-## Usage
+You will be prompted for project details and tool preferences.
 
-```python
-from {{cookiecutter.package_name}} import some_function
-```
+### Next steps
 
-## Development
+1. Navigate into your new project directory.
+2. Install dependencies:
 
-### Setting up the development environment
+    ```bash
+    poetry install
+    ```
 
-```bash
-# Install all dependencies including development dependencies
-poetry install
-```
-
-{% if cookiecutter.use_pytest == 'y' -%}
-### Testing
-
-```bash
-# Run tests
-poetry run pytest
-```
-{% endif -%}
-
-{% if cookiecutter.use_black == 'y' -%}
-### Formatting
-
-```bash
-# Format the code
-poetry run black .
-```
-{% endif -%}
-
-{% if cookiecutter.use_mypy == 'y' -%}
-### Type checking
-
-```bash
-# Run type checking
-poetry run mypy src/ tests/
-```
-{% endif -%}
-
-{% if cookiecutter.use_flake8 == 'y' -%}
-### Linting
-
-```bash
-# Run linting
-poetry run flake8 src/ tests/
-```
-{% endif -%}
+3. Start developing your project!
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This template is licensed under the MIT License - see the LICENSE file for details.
