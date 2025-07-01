@@ -20,16 +20,16 @@ A generated project will look like this:
 ```
 your_project_name/
 ├── your_package_name/
-│   └── __init__.py
 ├── data/
+├── docs/
 ├── notebooks/
+├── results/
 ├── scripts/
 ├── tests/
-│   └── __init__.py
-├── docs/
-├── pyproject.toml
+├── .gitignore
+├── LICENSE
 ├── README.md
-└── .gitignore
+└── pyproject.toml
 ```
 
 ## How to use this Cookiecutter
