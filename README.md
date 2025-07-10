@@ -53,11 +53,13 @@ You will be prompted for project details and tool preferences.
 ### Next steps
 
 1. Navigate into your new project directory.
-2. Install dependencies:
+2. Setup environment:
 
     ```bash
     poetry install
     ```
+
+    Please note that you already have the option to install the virtual environment during the project creation by selecting the appropriate option in the prompts. Make sure that you have the selected python version available. It needs to be set as default, or be avilable via `pyenv`.
 
 3. Start developing your project!
 
