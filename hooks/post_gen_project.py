@@ -13,7 +13,7 @@ def initialize_git():
 
 
 def initialize_pyenv():
-    """Initialize pyenv and install Python version."""
+    """Initialize pyenv and select Python version."""
     python_version = "{{ cookiecutter.python_version }}"
     subprocess.run(["poetry", "env", "use", python_version], check=True)
 
@@ -53,7 +53,7 @@ def main():
         choice = input().lower()
         if choice == "y":
             initialize_git()
-        print("Would you like to initialize pyenv? (y/n)")
+        print("Would you like to select the python version using pyenv? (y/n)")
         choice = input().lower()
         if choice == "y":
             initialize_pyenv()
