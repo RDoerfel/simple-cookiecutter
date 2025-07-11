@@ -49,7 +49,10 @@ def main():
     try:
         create_gitkeep_files()
         cleanup_github_files()
-        initialize_git()
+        print("Would you like to initialize a git repository? (y/n)")
+        choice = input().lower()
+        if choice == "y":
+            initialize_git()
         print("Would you like to initialize pyenv? (y/n)")
         choice = input().lower()
         if choice == "y":
