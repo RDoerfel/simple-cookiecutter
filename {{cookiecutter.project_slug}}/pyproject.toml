@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "{{cookiecutter.project_short_description}}"
 authors = [{name = "{{cookiecutter.author_name}}", email = "{{cookiecutter.author_email}}"}]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = "{{cookiecutter.python_version}}"
 dependencies = []
 
 [project.optional-dependencies]
