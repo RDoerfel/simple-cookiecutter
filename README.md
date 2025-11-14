@@ -1,6 +1,6 @@
 # simple-cookiecutter
 
-A modern Cookiecutter template for quickly setting up professional Python projects with Poetry, testing, and CI/CD best practices. This template creates a complete Python project with organized directories, Poetry configuration, optional development tools (pytest, black, mypy, flake8), GitHub Actions CI/CD, and automatic project initialization.
+A modern Cookiecutter template for quickly setting up professional Python projects with uv, testing, and CI/CD best practices. This template creates a complete Python project with organized directories, uv configuration, optional development tools (pytest, black, mypy, flake8), GitHub Actions CI/CD, and automatic project initialization.
 
 ## Prerequisites
 
@@ -12,14 +12,13 @@ Before using this template, ensure you have the following installed:
   ```bash
   pip install cookiecutter
   ```
-- **Poetry** - Modern Python dependency management
+- **uv** - Modern Python package and project manager
   ```bash
-  pip install poetry
+  curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
 
 ### Optional Dependencies
 - **Git** - Version control (recommended) - [Install Git](https://git-scm.com/)
-- **pyenv** - Python version management (optional but recommended) - [Install pyenv](https://pyenv.net/)
 
 ## Usage
 
@@ -39,7 +38,7 @@ During project generation, you'll be prompted for:
 | `project_name` | Human-readable project name | "My Python Project" |
 | `project_slug` | URL-friendly project name (auto-generated) | "my-python-project" |
 | `package_name` | Python package name (auto-generated) | "my_python_project" |
-| `project_short_description` | Brief project description | "A Python project using Poetry" |
+| `project_short_description` | Brief project description | "A Python project using uv" |
 | `python_version` | Target Python version | "3.10" |
 | `author_name` | Your full name | "Your Name" |
 | `author_email` | Your email address | "your.email@example.com" |
@@ -58,7 +57,7 @@ $ cookiecutter gh:RDoerfel/simple-cookiecutter
 project_name [My Python Project]: Data Analysis Toolkit
 project_slug [data-analysis-toolkit]: 
 package_name [data_analysis_toolkit]: 
-project_short_description [A Python project using Poetry]: A comprehensive toolkit for data analysis and visualization
+project_short_description [A Python project using uv]: A comprehensive toolkit for data analysis and visualization
 python_version [3.10]: 3.11
 author_name [Your Name]: Jane Smith
 author_email [your.email@example.com]: jane.smith@example.com
@@ -95,7 +94,7 @@ data-analysis-toolkit/
 ├── .gitignore                      # Git ignore rules
 ├── LICENSE                         # MIT License
 ├── README.md                       # Project documentation
-└── pyproject.toml                  # Poetry configuration
+└── pyproject.toml                  # Project configuration
 ```
 
 ## Post-Generation Setup
@@ -103,8 +102,7 @@ data-analysis-toolkit/
 After generating your project, the template will offer to:
 
 1. **Initialize Git repository** with initial commit
-2. **Set up Python environment** using pyenv (if available)
-3. **Install dependencies** using Poetry
+2. **Install dependencies** using uv
 
 ### Manual Setup (if automated setup was skipped)
 
@@ -117,14 +115,8 @@ git init
 git add .
 git commit -m "Initial commit"
 
-# Set Python version (if using pyenv)
-pyenv local 3.11  # or your chosen version
-
 # Install dependencies
-poetry install
-
-# Activate virtual environment
-poetry shell
+uv sync
 ```
 
 ## Development Workflow
@@ -132,37 +124,37 @@ poetry shell
 ### Running Tests
 ```bash
 # Run all tests
-poetry run pytest
+uv run pytest
 
 # Run tests with coverage
-poetry run pytest --cov=your_package_name
+uv run pytest --cov=your_package_name
 
 # Generate HTML coverage report
-poetry run pytest --cov=your_package_name --cov-report=html
+uv run pytest --cov=your_package_name --cov-report=html
 ```
 
 ### Code Quality
 ```bash
 # Format code with Black
-poetry run black .
+uv run black .
 
 # Type checking with MyPy
-poetry run mypy your_package_name/
+uv run mypy your_package_name/
 
 # Linting with Flake8
-poetry run flake8 your_package_name/ tests/
+uv run flake8 your_package_name/ tests/
 ```
 
 ### Adding Dependencies
 ```bash
 # Add runtime dependency
-poetry add requests pandas numpy
+uv add pandas numpy
 
 # Add development dependency
-poetry add --group dev jupyter ipython
+uv add --dev jupyter ipython
 
 # Update dependencies
-poetry update
+uv sync
 ```
 
 ## GitHub Integration
@@ -183,19 +175,10 @@ When GitHub Actions is enabled, the template creates a complete CI/CD pipeline t
 2. Copy the upload token from your repository settings
 3. Add it as a secret named `CODECOV_TOKEN` in your GitHub repository settings
 
-**Python version not found**: Install the required Python version
-```bash
-# Using pyenv
-pyenv install 3.11.0
-pyenv global 3.11.0
-
-# Or update python_version in cookiecutter.json
-```
-
 ## Acknowledgments
 
 - [Cookiecutter](https://cookiecutter.readthedocs.io/) - The template engine
-- [Poetry](https://python-poetry.org/) - Modern Python dependency management
+- [uv](https://docs.astral.sh/uv/) - Fast Python package and project manager
 - [pytest](https://pytest.org/) - Testing framework
 - [Black](https://black.readthedocs.io/) - Code formatter
 - [MyPy](https://mypy.readthedocs.io/) - Static type checker

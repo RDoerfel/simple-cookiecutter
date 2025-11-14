@@ -12,16 +12,10 @@ def initialize_git():
     print("Git repository initialized with initial commit.")
 
 
-def initialize_pyenv():
-    """Initialize pyenv and select Python version."""
-    python_version = "{{ cookiecutter.python_version }}"
-    subprocess.run(["poetry", "env", "use", python_version], check=True)
-
-
-def initialize_poetry():
-    """Initialize poetry and install dependencies."""
-    subprocess.run(["poetry", "install"], check=True)
-    print("Poetry dependencies installed.")
+def initialize_uv():
+    """Initialize uv and install dependencies."""
+    subprocess.run(["uv", "sync", "--dev"], check=True)
+    print("Dependencies installed with uv.")
 
 
 def create_gitkeep_files():
@@ -53,14 +47,10 @@ def main():
         choice = input().lower()
         if choice == "y":
             initialize_git()
-        print("Would you like to select the python version using pyenv? (y/n)")
-        choice = input().lower()
-        if choice == "y":
-            initialize_pyenv()
         print("Would you like to install dependencies now? (y/n)")
         choice = input().lower()
         if choice == "y":
-            initialize_poetry()
+            initialize_uv()
     except Exception as e:
         print(f"An error occurred: {e}")
         print("You may need to run these commands manually.")

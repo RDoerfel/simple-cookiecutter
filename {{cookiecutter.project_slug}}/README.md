@@ -19,14 +19,14 @@
 ├── docs/               # Documentation
 ├── scripts/            # Utility scripts
 ├── notebooks/          # Jupyter notebooks
-└── pyproject.toml      # Poetry configuration
+└── pyproject.toml      # uv configuration
 ```
 
 ## Installation
 
 ```bash
 # Install the package and dependencies
-poetry install
+uv sync
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ from {{cookiecutter.package_name}} import some_function
 
 ```bash
 # Install all dependencies including development dependencies
-poetry install
+uv sync --dev
 ```
 
 {% if cookiecutter.use_pytest == 'y' -%}
@@ -49,7 +49,7 @@ poetry install
 
 ```bash
 # Run tests
-poetry run pytest
+uv run pytest
 ```
 {% endif -%}
 
@@ -58,7 +58,7 @@ poetry run pytest
 
 ```bash
 # Run tests with coverage
-poetry run pytest --cov={{cookiecutter.package_name}} --cov-report=html
+uv run pytest --cov={{cookiecutter.package_name}} --cov-report=html
 
 # View the HTML coverage report
 open htmlcov/index.html  # On macOS
@@ -72,7 +72,7 @@ open htmlcov/index.html  # On macOS
 
 ```bash
 # Format the code
-poetry run black .
+uv run black .
 ```
 {% endif -%}
 
@@ -81,7 +81,7 @@ poetry run black .
 
 ```bash
 # Run type checking
-poetry run mypy {{cookiecutter.package_name}}/ tests/
+uv run mypy {{cookiecutter.package_name}}/ tests/
 ```
 {% endif -%}
 
@@ -90,7 +90,7 @@ poetry run mypy {{cookiecutter.package_name}}/ tests/
 
 ```bash
 # Run linting
-poetry run flake8 {{cookiecutter.package_name}}/ tests/
+uv run flake8 {{cookiecutter.package_name}}/ tests/
 ```
 {% endif -%}
 

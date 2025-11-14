@@ -1,34 +1,35 @@
-[tool.poetry]
+[project]
 name = "{{cookiecutter.package_name}}"
 version = "0.1.0"
 description = "{{cookiecutter.project_short_description}}"
-authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+authors = [{name = "{{cookiecutter.author_name}}", email = "{{cookiecutter.author_email}}"}]
 readme = "README.md"
-packages = [{include = "{{cookiecutter.package_name}}"}]
+requires-python = ">=3.8"
+dependencies = []
+dynamic = ["version"]
 
-[tool.poetry.dependencies]
-python = "^{{cookiecutter.python_version}}"
-
-[tool.poetry.group.dev.dependencies]
+[project.optional-dependencies]
+dev = [
 {% if cookiecutter.use_pytest == 'y' -%}
-pytest = "^7.4.0"
+    "pytest>=7.4.0",
 {% endif -%}
 {% if cookiecutter.use_coverage == 'y' -%}
-pytest-cov = "^4.1.0"
+    "pytest-cov>=4.1.0",
 {% endif -%}
 {% if cookiecutter.use_black == 'y' -%}
-black = "^23.7.0"
+    "black>=23.7.0",
 {% endif -%}
 {% if cookiecutter.use_mypy == 'y' -%}
-mypy = "^1.5.0"
+    "mypy>=1.5.0",
 {% endif -%}
 {% if cookiecutter.use_flake8 == 'y' -%}
-flake8 = "^6.1.0"
+    "flake8>=6.1.0",
 {% endif -%}
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 {% if cookiecutter.use_black == 'y' -%}
 [tool.black]
