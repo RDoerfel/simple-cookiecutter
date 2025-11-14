@@ -50,6 +50,22 @@ During project generation, you'll be prompted for:
 | `use_flake8` | Include Flake8 linter | "y" |
 | `use_github_actions` | Include GitHub Actions CI/CD | "y" |
 
+### Python Version Selection
+
+When prompted for the `python_version`, you must specify your target Python version with a comparison operator:
+
+| Format | Example | Description |
+|--------|---------|-------------|
+| **Exact version** | `==3.10.5` | Specifies an exact Python version |
+| **Patch version range** | `==3.11.*` | Any patch version of Python 3.11 (e.g., 3.11.0, 3.11.1, 3.11.8) |
+| **Greater than or equal** | `>=3.10` | Python 3.10 or newer |
+| **Greater than** | `>3.9` | Python 3.10 and newer (excludes 3.9) |
+
+The selected Python version will be used in:
+- `pyproject.toml` - Sets the required Python version constraint
+- `.github/workflows/ci.yml` - Specifies the Python version for CI/CD testing
+- Type checking configurations (MyPy)
+
 ### Example Session
 
 ```bash
